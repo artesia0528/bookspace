@@ -18,11 +18,11 @@ export default function Header() {
   if (!isAuthenticated) return null;
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-md">
-      <div className="container mx-auto px-4 py-4">
+    <header className="bg-white shadow-md dark:bg-gray-800">
+      <div className="container px-4 py-4 mx-auto">
         <div className="flex items-center justify-between">
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <Book className="h-8 w-8 text-blue-600" />
+            <Book className="w-8 h-8 text-blue-600" />
             <span className="text-xl font-bold text-gray-800 dark:text-white">
               BookSpace
             </span>
@@ -33,7 +33,7 @@ export default function Header() {
               href="/dashboard"
               className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-blue-600"
             >
-              <Home className="h-4 w-4" />
+              <Home className="w-4 h-4" />
               <span>Dashboard</span>
             </Link>
 
@@ -41,21 +41,21 @@ export default function Header() {
               href="/favorites"
               className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-blue-600"
             >
-              <Heart className="h-4 w-4" />
+              <Heart className="w-4 h-4" />
               <span>Favorites</span>
             </Link>
 
             <ModeToggle />
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-600 dark:text-gray-300 mr-5 border px-3 py-2 rounded-lg">
+              <span className="px-3 py-2 mr-5 text-sm text-gray-600 border rounded-lg dark:text-gray-300">
                 {user?.name}
               </span>
               <button
                 onClick={handleLogout}
                 className="flex items-center space-x-1 text-red-600 hover:text-red-700"
               >
-                <LogOut className="h-4 w-4" />
+                <LogOut className="w-4 h-4" />
                 <span>Logout</span>
               </button>
             </div>
