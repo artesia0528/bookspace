@@ -12,28 +12,23 @@ interface AppState {
   books: Book[];
   favorites: Book[];
   
-  // Theme
-  isDarkMode: boolean;
-  
   // Actions
   setAuth: (user: User, token: string) => void;
   logout: () => void;
   setBooks: (books: Book[]) => void;
   addToFavorites: (book: Book) => void;
   removeFromFavorites: (bookId: string) => void;
-  toggleTheme: () => void;
 }
 
 export const useStore = create<AppState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       // Initial state
       user: null,
       token: null,
       isAuthenticated: false,
       books: [],
       favorites: [],
-      isDarkMode: false,
       
       // Actions
       setAuth: (user, token) => set({ 
@@ -56,10 +51,6 @@ export const useStore = create<AppState>()(
       
       removeFromFavorites: (bookId) => set((state) => ({
         favorites: state.favorites.filter(book => book.id !== bookId)
-      })),
-      
-      toggleTheme: () => set((state) => ({
-        isDarkMode: !state.isDarkMode
       })),
     }),
     {

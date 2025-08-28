@@ -16,6 +16,22 @@ export default function DashboardPage() {
   const router = useRouter();
   
   useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const params = new URLSearchParams();
+        if (searchQuery) params.append('search', searchQuery);
+        if (selectedCategory !== 'all') params.append('category', selectedCategory);
+        
+        const response = await fetch(`/api/books?${params}`);
+        const data = await response.json();
+        setBooks(data);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (!isAuthenticated) {
       router.push('/auth/login');
       return;
@@ -23,22 +39,6 @@ export default function DashboardPage() {
     
     fetchBooks();
   }, [isAuthenticated, router, searchQuery, selectedCategory]);
-  
-  const fetchBooks = async () => {
-    try {
-      const params = new URLSearchParams();
-      if (searchQuery) params.append('search', searchQuery);
-      if (selectedCategory !== 'all') params.append('category', selectedCategory);
-      
-      const response = await fetch(`/api/books?${params}`);
-      const data = await response.json();
-      setBooks(data);
-    } catch (error) {
-      console.error('Error fetching books:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
   
   if (!isAuthenticated) {
     return null;

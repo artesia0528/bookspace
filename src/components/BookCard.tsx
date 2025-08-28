@@ -54,7 +54,7 @@ export default function BookCard({ book }: BookCardProps) {
         <p className="text-gray-500 dark:text-gray-400 text-xs mb-3">
           {book.category} • {book.publishedYear}
         </p>
-        <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-3">
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-1">
           {book.description}
         </p>
         

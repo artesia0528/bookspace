@@ -1,21 +1,23 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useStore } from '@/store/useStore';
-import { LogOut, Book, Heart, Home, Moon, Sun } from 'lucide-react';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useStore } from "@/store/useStore";
+import { LogOut, Book, Heart, Home, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export default function Header() {
-  const { user, isAuthenticated, logout, isDarkMode, toggleTheme } = useStore();
+  const { user, isAuthenticated, logout } = useStore();
+  const { theme, setTheme } = useTheme();
   const router = useRouter();
-  
+
   const handleLogout = () => {
     logout();
-    router.push('/auth/login');
+    router.push("/auth/login");
   };
-  
+
   if (!isAuthenticated) return null;
-  
+
   return (
     <header className="bg-white dark:bg-gray-800 shadow-md">
       <div className="container mx-auto px-4 py-4">
@@ -26,7 +28,7 @@ export default function Header() {
               BookSpace
             </span>
           </Link>
-          
+
           <nav className="flex items-center space-x-4">
             <Link
               href="/dashboard"
@@ -35,7 +37,7 @@ export default function Header() {
               <Home className="h-4 w-4" />
               <span>Dashboard</span>
             </Link>
-            
+
             <Link
               href="/favorites"
               className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-blue-600"
@@ -43,14 +45,19 @@ export default function Header() {
               <Heart className="h-4 w-4" />
               <span>Favorites</span>
             </Link>
-            
-            <button
-              onClick={toggleTheme}
-              className="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600"
-            >
-              {isDarkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </button>
-            
+
+              <button
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                className="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? (
+                  <Sun className="h-4 w-4" />
+                ) : (
+                  <Moon className="h-4 w-4" />
+                )}
+              </button>
+
             <div className="flex items-center space-x-2">
               <span className="text-sm text-gray-600 dark:text-gray-300">
                 {user?.name}
