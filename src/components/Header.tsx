@@ -3,12 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useStore } from "@/store/useStore";
-import { LogOut, Book, Heart, Home, Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import { LogOut, Book, Heart, Home} from "lucide-react";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useStore();
-  const { theme, setTheme } = useTheme();
   const router = useRouter();
 
   const handleLogout = () => {
@@ -46,20 +45,10 @@ export default function Header() {
               <span>Favorites</span>
             </Link>
 
-              <button
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="p-2 text-gray-600 dark:text-gray-300 hover:text-blue-600"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-4 w-4" />
-                ) : (
-                  <Moon className="h-4 w-4" />
-                )}
-              </button>
+            <ModeToggle />
 
             <div className="flex items-center space-x-2">
-              <span className="text-sm text-gray-600 dark:text-gray-300">
+              <span className="text-sm text-gray-600 dark:text-gray-300 mr-5 border px-3 py-2 rounded-lg">
                 {user?.name}
               </span>
               <button

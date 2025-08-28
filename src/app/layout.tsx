@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem>
+        <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem >
           <Header />
           <main>{children}</main>
         </ThemeProvider>
