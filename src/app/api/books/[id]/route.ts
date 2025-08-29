@@ -54,7 +54,7 @@ const books = [
   },
 ];
 
-export async function get(
+export async function GET(
   request: NextRequest,
   context: { params: { id: string } }
 ) {
