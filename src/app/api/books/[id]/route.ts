@@ -56,9 +56,10 @@ const books = [
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } }
-) {
-  const { id } = await Promise.resolve(context.params);
+  // context: { params: { id: string } }
+  { params } : { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
+  const { id } = await params;
   const book = books.find((b) => b.id === id);
 
   if (!book) {
