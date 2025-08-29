@@ -1,21 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useStore } from "@/store/useStore";
-import { LogOut, Book, Heart, Home} from "lucide-react";
+import { LogOut, Book, Heart, Home } from "lucide-react";
 import { ModeToggle } from "./ModeToggle";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useStore();
   const router = useRouter();
+  const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLogout = () => {
     logout();
     router.push("/auth/login");
   };
 
-  if (!isAuthenticated) return null;
+  // Don't render anything until mounted to prevent hydration mismatch
+  if (!mounted) return null;
+
+  // Don't show header on auth pages
+  if (pathname?.startsWith("/auth/") || !isAuthenticated) return null;
 
   return (
     <header className="bg-white shadow-md dark:bg-gray-800">

@@ -41,7 +41,7 @@ export const useStore = create<AppState>()(
       // Actions
       getFavorites: () => {
         const state = get();
-        if (!state.user) return [];
+        if (!state.user || !state.isAuthenticated) return [];
         return state.userFavorites[state.user.id] || [];
       },
 

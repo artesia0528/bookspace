@@ -31,6 +31,7 @@ export default function BookCard({ book }: BookCardProps) {
           width={300}
           height={400}
           className="w-full h-48 object-cover"
+          priority
         />
         <button
           onClick={toggleFavorite}
